@@ -17,20 +17,21 @@ def main():
     player.status(point= point)
     key = input("キー入力：")
     map.move(key= key)
+    map.show()
 
     while flag:
-        for i in map.scan():
-            if i == "G":
-                clear = True
-                flag = False
-            if i == "C":
-                map.map_lists[map.now_h][map.now_w] = "Ｃ"
-                point += 1
+        key = input("キー入力：")
+        scan_res = map.scan(key= key)
+        if scan_res == "G":
+            clear = True
+            flag = False
+
+        if scan_res == "C":
+            point += 1
                 
         print("\033[17A\033[K", end="")#カーソルのをマップの上に戻す。
         map.show()
         player.status(point= point)
-        key = input("キー入力：")
         map.move(key= key)
 
         if key == "q":

@@ -68,11 +68,20 @@ class Map:
         self.now_w = new_w
         self.map_lists[self.now_h][self.now_w] = "P"
         
-    def scan(self):
-        (w, a, s ,d) = self.map_lists[self.now_h-1][self.now_w],  self.map_lists[self.now_h][self.now_w-1]\
-                      ,self.map_lists[self.now_h+1][self.now_w ], self.map_lists[self.now_h][self.now_w+1]
-        
-        return (w, a, s ,d)
+    def scan(self, key):
+        if key == "w":
+            return self.map_lists[self.now_h-1][self.now_w]
 
+        elif key == "s":
+            return self.map_lists[self.now_h+1][self.now_w]
+        
+        elif key == "a":
+            return self.map_lists[self.now_h][self.now_w-1]
+        
+        elif key == "d":
+            return self.map_lists[self.now_h][self.now_w+1]
+
+        else :
+            return None
 
 

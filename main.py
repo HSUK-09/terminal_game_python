@@ -10,16 +10,27 @@ def main():
     print("==COR==")
     player_name = input("名前を入力してください：")
     player = Player(name= player_name)
+    map = Map(1, 1)
     player.show()
     print("===============================")
-    map = Map(1, 1)
+
     map.show()
     player.status(point= point)
     key = input("キー入力：")
+    scan_res = map.scan(key= key)
+    if scan_res == "G":
+        clear = True
+        flag = False
+
+    if scan_res == "C":
+        point += 1
+
     map.move(key= key)
-    map.show()
 
     while flag:
+        print("\033[17A\r", end="")
+        map.show()
+        player.status(point= point)
         key = input("キー入力：")
         scan_res = map.scan(key= key)
         if scan_res == "G":
@@ -28,12 +39,8 @@ def main():
 
         if scan_res == "C":
             point += 1
-                
-        print("\033[17A\033[K", end="")#カーソルのをマップの上に戻す。
-        map.show()
-        player.status(point= point)
-        map.move(key= key)
 
+        map.move(key= key)
         if key == "q":
             flag = False
 

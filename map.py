@@ -40,35 +40,33 @@ class Map:
             print(map)
 
     def move(self, key):
+        #プレイヤーの移動処理
         new_h = self.now_h
         new_w = self.now_w
 
         self.map_lists[self.now_h][self.now_w] = "E"
         if key == "w" and self.map_lists[self.now_h - 1][self.now_w] != "B":
-            #new_h += self.up[0]
-            #new_w += self.up[1]
-            new_h -= 1
+            new_h += self.up[0]
+            new_w += self.up[1]
 
         elif key == "s" and self.map_lists[self.now_h + 1][self.now_w] != "B":
-            #new_h += self.down[0]
-            #new_w += self.down[1]
-            new_h += 1
+            new_h += self.down[0]
+            new_w += self.down[1]
             
         elif key == "a" and self.map_lists[self.now_h][self.now_w - 1] != "B":
-            #new_h += self.right[0]
-            #new_w += self.right[1]
-            new_w -= 1 
+            new_h += self.right[0]
+            new_w += self.right[1]
 
         elif key == "d"and self.map_lists[self.now_h][self.now_w + 1] != "B":
-            #new_h += self.left[0]
-            #new_w += self.left[1]
-            new_w += 1
+            new_h += self.left[0]
+            new_w += self.left[1]
 
         self.now_h = new_h
         self.now_w = new_w
         self.map_lists[self.now_h][self.now_w] = "P"
         
     def scan(self, key):
+        #特殊ブロックの取得判定
         if key == "w":
             return self.map_lists[self.now_h-1][self.now_w]
 

@@ -10,7 +10,7 @@ def main():
     print("==COR==")
     player_name = input("名前を入力してください：")
     player = Player(name= player_name)
-    map = Map(1, 1)
+    map = Map(1, 1)#mapオブジェクトの作成とプレイヤーの初期位置の設定
     player.show()
     print("===============================")
 
@@ -28,10 +28,12 @@ def main():
     map.move(key= key)
 
     while flag:
-        print("\033[17A\r", end="")
-        map.show()
-        player.status(point= point)
+        print("\033[24A\r", end="")#カーソルを上書きのためマップ左上に戻す。
+        map.show()#マップの表示
+        player.status(point= point)#プレイヤーのステータスの表示
         key = input("キー入力：")
+        
+        #特殊ブロック判定と触れた時の処理
         scan_res = map.scan(key= key)
         if scan_res == "G":
             clear = True

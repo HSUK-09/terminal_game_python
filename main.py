@@ -2,7 +2,7 @@ from map import Map
 from player import Player
 
 def main():
-
+    game_mode = 0
     flag = True
     clear = False
     point = 0
@@ -14,10 +14,12 @@ def main():
     player.show()
     print("===============================")
 
-    map.show()
+    map_lists = map.map_lists_stage1
+
+    map.show(map_lists= map_lists)
     player.status(point= point)
     key = input("キー入力：")
-    scan_res = map.scan(key= key)
+    scan_res = map.scan(key= key, map_lists= map_lists)
     if scan_res == "G":
         clear = True
         flag = False
@@ -25,24 +27,34 @@ def main():
     if scan_res == "C":
         point += 1
 
-    map.move(key= key)
+    map.move(key= key, map_lists= map_lists)
 
     while flag:
+        if game_mode == 0:
+            map_lists = map.map_lists_stage1
+
+        elif game_mode == 1:
+            map_lists = map.map_lists_stage2
+
         print("\033[24A\r", end="")#カーソルを上書きのためマップ左上に戻す。
-        map.show()#マップの表示
+        map.show(map_lists= map_lists)#マップの表示
         player.status(point= point)#プレイヤーのステータスの表示
         key = input("キー入力：")
         
         #特殊ブロック判定と触れた時の処理
-        scan_res = map.scan(key= key)
+        scan_res = map.scan(key= key, map_lists= map_lists)
         if scan_res == "G":
-            clear = True
-            flag = False
+            if game_mode == 0:
+                game_mode = 1
+
+            elif game_mode == 1:
+                clear = True
+                flag = False
 
         if scan_res == "C":
             point += 1
 
-        map.move(key= key)
+        map.move(key= key, map_lists= map_lists)
         if key == "q":
             flag = False
 

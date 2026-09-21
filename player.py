@@ -3,7 +3,7 @@ class Player:
         self.name = name
 
     def show(self):
-        print(self.name)
+        print(f"{self.name}、あなたは迷路の塔に閉じ込められてしまいました\n")
 
     def status(self, point):
         print("==========")

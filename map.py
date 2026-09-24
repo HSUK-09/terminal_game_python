@@ -15,17 +15,17 @@ class Map:
                                  ["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"]]
         
         self.map_lists_stage2 = [["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
-                                 ["B","G","B","E","B","E","E","E","E","E","E","E","E","E","C","E","E","B"],
-                                 ["B","E","B","E","B","C","B","E","B","B","B","E","B","E","E","B","B","B"],
-                                 ["B","E","B","E","B","E","B","E","B","E","E","E","B","B","B","E","E","B"],
-                                 ["B","E","B","E","B","E","B","E","B","E","B","B","B","E","B","E","E","B"],
-                                 ["B","E","B","E","B","E","B","E","B","C","E","E","B","E","E","E","E","B"],
-                                 ["B","E","B","C","E","C","B","E","B","E","B","B","B","B","B","E","E","B"],
-                                 ["B","E","B","E","B","B","B","B","B","E","E","E","B","E","E","E","E","B"],
-                                 ["B","E","B","E","B","E","E","B","B","E","B","C","B","E","B","E","B","B"],
-                                 ["B","E","B","E","B","C","B","B","B","E","E","E","E","E","E","E","E","B"],
-                                 ["B","E","B","E","B","E","B","E","E","E","B","E","B","E","B","E","B","B"],
-                                 ["B","E","E","E","B","E","E","C","E","E","B","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
+                                 ["B","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","E","B"],
                                  ["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"]]
         self.now_h = now_h
         self.now_w = now_w
@@ -42,14 +42,23 @@ class Map:
 
         #ブロックを追加する際はmap_blockにキーと値（マップの記号：　表示する記号）を追加
         map_block = {"E": "　", "B": "＃", "P": "ｐ", "G": "G ", "C":  "Ｃ"}
-        block_key_lists = list(map_block.keys())
+        
         for array in map_lists:
             map = ""
             for string in array:
-                for key in block_key_lists:
-                    if string == key:
-                        string = map_block[key]
-                map  = map + string
+                block = map_block[string]
+                
+                #表示する記号に色をつける
+                if string == "B":
+                    block = "\033[32m" + block + "\033[0m"
+
+                elif string == "C":
+                    block = "\033[33m" + block + "\033[0m"
+
+                elif string == "P":
+                    block = "\033[31m" + block + "\033[0m"
+
+                map  += block
             print(map)
 
     def move(self, key, map_lists):

@@ -46,6 +46,7 @@ def main():
         if scan_res == "G":
             if game_mode == 0:
                 game_mode = 1
+                map.map_lists_stage2[1][16] = "P"
 
             elif game_mode == 1:
                 clear = True

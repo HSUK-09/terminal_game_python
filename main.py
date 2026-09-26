@@ -36,7 +36,10 @@ def main():
         elif game_mode == 1:
             map_lists = map.map_lists_stage2
 
-        print("\033[24A\r", end="")#カーソルを上書きのためマップ左上に戻す。
+        elif game_mode == 2:
+            map_lists = map.map_lists_stage3
+
+        print("\033[25A\r", end="")#カーソルを上書きのためマップ左上に戻す。
         map.show(map_lists= map_lists)#マップの表示
         player.status(point= point)#プレイヤーのステータスの表示
         key = input("キー入力：")
@@ -49,6 +52,10 @@ def main():
                 map.map_lists_stage2[1][16] = "P"
 
             elif game_mode == 1:
+                game_mode = 2
+                map.map_lists_stage3[6][1] = "P"
+
+            elif game_mode == 2:
                 clear = True
                 flag = False
 

@@ -118,4 +118,32 @@ class Map:
         else :
             return None
 
+    def switch_stage(self, stage_num):
+        map_lists = None
+
+        if stage_num == 1:
+            return self.map_lists_stage1
+
+        elif stage_num == 2:
+            return self.map_lists_stage2
+
+        elif stage_num == 3:
+            return self.map_lists_stage3
+        
+        else:
+            return None
+
+    def player_pos(self, stage_num, h, w):
+        if stage_num == 1:
+            self.map_lists_stage1[h][w] = "P"
+
+        elif stage_num == 2:
+            self.map_lists_stage2[h][w] = "P"
+
+        elif stage_num == 3:
+            self.map_lists_stage3[h][w] = "P"
+        
+        else:
+            return None
+    
 

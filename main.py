@@ -14,7 +14,7 @@ def main():
     player.show()
     print("===============================")
 
-    map_lists = map.map_lists_stage1
+    map_lists = map.switch_stage(1)
 
     map.show(map_lists= map_lists)
     player.status(point= point)
@@ -31,13 +31,13 @@ def main():
 
     while flag:
         if game_mode == 0:
-            map_lists = map.map_lists_stage1
+            map_lists = map.switch_stage(1)
 
         elif game_mode == 1:
-            map_lists = map.map_lists_stage2
+            map_lists = map.switch_stage(2)
 
         elif game_mode == 2:
-            map_lists = map.map_lists_stage3
+            map_lists = map.switch_stage(3)
 
         print("\033[25A\r", end="")#カーソルを上書きのためマップ左上に戻す。
         map.show(map_lists= map_lists)#マップの表示
@@ -49,11 +49,11 @@ def main():
         if scan_res == "G":
             if game_mode == 0:
                 game_mode = 1
-                map.map_lists_stage2[1][16] = "P"
+                map.player_pos(2, 1, 16)
 
             elif game_mode == 1:
                 game_mode = 2
-                map.map_lists_stage3[6][1] = "P"
+                map.player_pos(3, 6, 1)
 
             elif game_mode == 2:
                 clear = True
